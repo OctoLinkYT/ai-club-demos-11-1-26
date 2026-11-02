@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101721">
+  <title>Element Lab — a little world of what if</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="simulation.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <main>
+    <header class="masthead">
+      <div class="brand"><span class="logo" aria-hidden="true">✳</span><div><p class="eyebrow">AI CLUB / EXPERIMENT 001</p><h1>Element<span>Lab</span><span class="title-dot">.</span></h1></div></div>
+      <div class="intro"><strong>A little world of <em>what if.</em></strong><p>Pick an element. Draw something. See what happens.</p></div>
+    </header>
+    <section class="lab" aria-label="Interactive element sandbox">
+      <aside class="toolbox">
+        <div class="section-label"><span>01 / ELEMENTS</span><span>↓</span></div>
+        <div class="materials" role="group" aria-label="Painting material">
+          <button class="material selected" data-material="1" aria-pressed="true" style="--accent:#f5c96b"><span class="symbol">⠿</span><span>Sand<small>Falls & piles</small></span><kbd>1</kbd></button>
+          <button class="material" data-material="2" aria-pressed="false" style="--accent:#62b9ff"><span class="symbol">≈</span><span>Water<small>Flows & spreads</small></span><kbd>2</kbd></button>
+          <button class="material" data-material="3" aria-pressed="false" style="--accent:#a2acc3"><span class="symbol">▦</span><span>Wall<small>Holds everything</small></span><kbd>3</kbd></button>
+          <button class="material" data-material="4" aria-pressed="false" style="--accent:#ff865c"><span class="symbol">♨</span><span>Fire<small>Burns plants</small></span><kbd>4</kbd></button>
+          <button class="material" data-material="5" aria-pressed="false" style="--accent:#94dfa1"><span class="symbol">⚘</span><span>Plant<small>Grows your scene</small></span><kbd>5</kbd></button>
+          <button class="material" data-material="0" aria-pressed="false" style="--accent:#d8b6ef"><span class="symbol">◇</span><span>Eraser<small>Makes room</small></span><kbd>6</kbd></button>
+        </div>
+        <div class="brush-panel"><label for="brush">Brush size <output id="brush-value" for="brush">9 px</output></label><input id="brush" type="range" min="1" max="12" value="4"><div class="range-labels"><span>Fine</span><span>Bold</span></div></div>
+        <div class="tip"><span class="eyebrow">TRY A CHAIN REACTION</span><p>Draw a trail of plants, then touch one end with fire.</p><span>Curiosity is the only rule. ↗</span></div>
+      </aside>
+      <div class="workspace">
+        <div class="canvas-bar"><span><i id="status-dot"></i><span id="status">LIVE SIMULATION</span></span><span class="grid-info">240 × 150 · CLOSED WORLD</span></div>
+        <div class="canvas-wrap" id="canvas-wrap"><canvas id="sandbox" width="240" height="150" tabindex="0" aria-label="Element sandbox. Drag to paint. Arrow keys move the brush; Enter paints at the keyboard cursor."></canvas><div class="canvas-hint" id="canvas-hint">YOUR NEXT DISCOVERY STARTS HERE</div></div>
+        <div class="canvas-footer"><span id="tool-caption"><b>Sand</b> selected · drag to paint</span><span id="particle-count">0 particles</span></div>
+        <div class="actions"><button id="pause">Ⅱ <span>Pause</span></button><button id="example">↗ Load example</button><button id="clear">⌫ Clear</button><span class="action-note">Make a mess. Start again.</span></div>
+      </div>
+    </section>
+    <footer class="page-footer"><span>SMALL ELEMENTS. ENDLESS POSSIBILITIES.</span><span>1–6 select · Space pauses · <span class="keyboard-note">Canvas: arrows + Enter paint</span></span></footer>
+    <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
+  </main>
+</body>
+</html>

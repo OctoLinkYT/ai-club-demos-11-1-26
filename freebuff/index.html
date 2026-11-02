@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="description" content="Element Lab is a playful falling-sand sandbox. Paint sand, water, walls, fire and plants, then watch them interact." />
+  <title>Element Lab — a falling-sand sandbox</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="brand">
+        <span class="logo" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none">
+            <path d="M18 5h12" stroke="url(#logoStroke)" stroke-width="3" stroke-linecap="round" />
+            <path d="M20 7v11L8 37a3.5 3.5 0 0 0 3 5.2h26A3.5 3.5 0 0 0 40 37L28 18V7" stroke="url(#logoStroke)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+            <path d="M13.5 31h21" stroke="url(#logoStroke)" stroke-width="3" stroke-linecap="round" />
+            <circle cx="24" cy="37" r="1.9" fill="#7dd3fc" />
+            <circle cx="29" cy="34" r="1.2" fill="#5eead4" />
+            <circle cx="19" cy="34.5" r="1.2" fill="#5eead4" />
+            <defs>
+              <linearGradient id="logoStroke" x1="8" y1="5" x2="40" y2="42" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#5eead4" />
+                <stop offset="1" stop-color="#38bdf8" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <div class="brand-text">
+          <h1>Element <em>Lab</em></h1>
+          <p class="tagline">Pick an element, then click or drag inside the tray. Fire spreads through plants.</p>
+        </div>
+      </div>
+      <div class="chips">
+        <span class="chip" id="statusChip"><span class="dot" aria-hidden="true"></span><span id="statusText">Running</span></span>
+        <span class="chip chip-quiet" id="countChip">0 cells</span>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="stage" id="stage">
+        <canvas id="lab" width="1200" height="700" tabindex="0" role="img"
+          aria-label="Element Lab simulation tray. Paint with the selected element by clicking or dragging."></canvas>
+        <span class="stage-tag" aria-hidden="true"><span class="tag-dot"></span>live tray</span>
+        <div class="hint" id="hint">Drag to paint <span class="hint-sep">·</span> <kbd>Space</kbd> pauses</div>
+        <noscript><p class="noscript">Element Lab needs JavaScript to run.</p></noscript>
+      </section>
+
+      <aside class="panel" aria-label="Lab controls">
+        <section class="group">
+          <div class="group-head">
+            <h2 id="elementsHeading">Elements</h2>
+            <span class="group-note">pick one</span>
+          </div>
+          <div class="tools" role="group" aria-labelledby="elementsHeading">
+            <button type="button" class="tool" data-material="1" aria-pressed="true" aria-keyshortcuts="1">
+              <span class="key" aria-hidden="true">1</span>
+              <span class="swatch" aria-hidden="true"></span>
+              <span class="tool-name">Sand</span>
+            </button>
+            <button type="button" class="tool" data-material="2" aria-pressed="false" aria-keyshortcuts="2">
+              <span class="key" aria-hidden="true">2</span>
+              <span class="swatch" aria-hidden="true"></span>
+              <span class="tool-name">Water</span>
+            </button>
+            <button type="button" class="tool" data-material="3" aria-pressed="false" aria-keyshortcuts="3">
+              <span class="key" aria-hidden="true">3</span>
+              <span class="swatch" aria-hidden="true"></span>
+              <span class="tool-name">Wall</span>
+            </button>
+            <button type="button" class="tool" data-material="4" aria-pressed="false" aria-keyshortcuts="4">
+              <span class="key" aria-hidden="true">4</span>
+              <span class="swatch" aria-hidden="true"></span>
+              <span class="tool-name">Fire</span>
+            </button>
+            <button type="button" class="tool" data-material="5" aria-pressed="false" aria-keyshortcuts="5">
+              <span class="key" aria-hidden="true">5</span>
+              <span class="swatch" aria-hidden="true"></span>
+              <span class="tool-name">Plant</span>
+            </button>
+            <button type="button" class="tool" data-material="0" aria-pressed="false" aria-keyshortcuts="6">
+              <span class="key" aria-hidden="true">6</span>
+              <span class="swatch" aria-hidden="true"></span>
+              <span class="tool-name">Eraser</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="group">
+          <label class="range-label" for="brush">Brush size <output id="brushValue" for="brush">7</output></label>
+          <input type="range" id="brush" min="1" max="24" step="1" value="7" aria-describedby="brushHelp" />
+          <p class="help" id="brushHelp">Bigger brushes paint faster. Arrow keys fine-tune.</p>
+        </section>
+
+        <section class="group">
+          <h2 id="actionsHeading">Controls</h2>
+          <div class="actions" role="group" aria-labelledby="actionsHeading">
+            <button type="button" id="pauseBtn" class="btn btn-primary" aria-pressed="false">Pause</button>
+            <button type="button" id="clearBtn" class="btn">Clear</button>
+            <button type="button" id="exampleBtn" class="btn">Example</button>
+          </div>
+        </section>
+
+        <section class="rules">
+          <h2>Lab notes</h2>
+          <ul>
+            <li><span class="bullet" style="--c: #f6c453"></span><span>Sand falls and piles up. It sinks through water.</span></li>
+            <li><span class="bullet" style="--c: #38bdf8"></span><span>Water falls, then flows sideways around obstacles.</span></li>
+            <li><span class="bullet" style="--c: #94a3b8"></span><span>Walls never move. Erase one to open a path.</span></li>
+            <li><span class="bullet" style="--c: #fb7185"></span><span>Fire burns plants for a moment, then dies out.</span></li>
+          </ul>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <p class="sr-only" id="announcer" aria-live="polite"></p>
+  <script src="sim.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
